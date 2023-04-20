@@ -32,7 +32,8 @@ public class CategoriaController {
 	
 	@GetMapping
 	public ResponseEntity<List<Categoria>> getAll() {
-		return ResponseEntity.ok(categoriaRepository.findAll());	
+		return ResponseEntity.ok(categoriaRepository.findAll());
+		
 	}
 	
 	@GetMapping("/{id}")
@@ -48,7 +49,7 @@ public class CategoriaController {
 	
 	@PostMapping
 	public ResponseEntity<Categoria> post(@Valid @RequestBody Categoria categoria) {
-		return ResponseEntity.status(HttpStatus.OK).body(categoriaRepository.save(categoria));		
+		return ResponseEntity.status(HttpStatus.CREATED).body(categoriaRepository.save(categoria));		
 	}
 	
 	@PutMapping

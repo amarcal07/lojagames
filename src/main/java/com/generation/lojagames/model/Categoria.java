@@ -18,8 +18,15 @@ import jakarta.validation.constraints.Size;
 @Entity
 @Table(name = "tb_categoria")
 public class Categoria {
-
-	//codigo heimy {
+	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	
+	@NotBlank(message = "O Atributo gênero é Obrigatório!")
+	@Size(max = 20, message = "O atributo gênero deve conter no máximo 20 caracteres")
+	private String genero;
+	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
 	@JsonIgnoreProperties("categoria")
 	private List<Produto> produto;
@@ -32,17 +39,6 @@ public class Categoria {
 	public void setProduto(List<Produto> produto) {
 		this.produto = produto;
 	}
-
-	// }
-	
-	
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
-	
-	@NotBlank(message = "O Atributo gênero é Obrigatório!")
-	@Size(max = 20, message = "O atributo gênero deve conter no máximo 20 caracteres")
-	private String genero;
 
 	public Long getId() {
 		return id;

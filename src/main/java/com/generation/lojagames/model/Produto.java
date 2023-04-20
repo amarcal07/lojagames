@@ -3,8 +3,6 @@ package com.generation.lojagames.model;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
-import org.hibernate.annotations.UpdateTimestamp;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Entity;
@@ -15,7 +13,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 
 @Entity
@@ -34,31 +32,18 @@ public class Produto {
 	private String descricao;
 	
 	@NotNull
-	@PositiveOrZero
+	@Positive
 	private BigDecimal preco;
 	
-	@UpdateTimestamp
-	private LocalDate dateLancamento;
-	
-	//codigo Heimy {
-	
-	@ManyToOne
-	@JsonIgnoreProperties("produto")
-	
-	private Categoria categoria;
-	
-	public Categoria getCategoria() {
-		return categoria;
-	}
-
-	public void setCategoria(Categoria categoria) {
-		this.categoria = categoria;
-	}
-	// }
+	private LocalDate datalancamento;
 	
 	@Size(max = 1000, message = "O atributo foto deve conter no máximo 1000 caracteres")
 	private String foto;
 	
+	@ManyToOne
+	@JsonIgnoreProperties("produto")
+	private Categoria categoria;
+
 	public Long getId() {
 		return id;
 	}
@@ -91,12 +76,12 @@ public class Produto {
 		this.preco = preco;
 	}
 
-	public LocalDate getDateLancamento() {
-		return dateLancamento;
+	public LocalDate getDatalancamento() {
+		return datalancamento;
 	}
 
-	public void setDateLancamento(LocalDate dateLancamento) {
-		this.dateLancamento = dateLancamento;
+	public void setDatalancamento(LocalDate datalancamento) {
+		this.datalancamento = datalancamento;
 	}
 
 	public String getFoto() {
@@ -106,5 +91,14 @@ public class Produto {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
+	}
+	
 	
 }
